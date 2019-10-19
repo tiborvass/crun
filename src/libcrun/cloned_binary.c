@@ -238,6 +238,14 @@ enum {
 #  endif
 #endif
 
+/*
+ * secure_getenv only works with glibc
+ * otherwise it falls back to getenv (e.g., with musl).
+ */
+#if !defined(secure_getenv)
+#  define secure_getenv getenv
+#endif
+
 static int make_execfd(int *fdtype)
 {
 	int fd = -1;
